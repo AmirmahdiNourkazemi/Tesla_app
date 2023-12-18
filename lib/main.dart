@@ -25,16 +25,32 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: NeumorphicThemeData(
         textTheme: TextTheme(
-            bodySmall: GoogleFonts.lato(
-              fontSize: 24,
-              color: TextColors.textBodySmallColor,
-              fontWeight: FontWeight.w400,
-            ),
-            bodyLarge: GoogleFonts.lato(
-              fontSize: 40,
-              color: TextColors.textBodyLargeColor,
-              fontWeight: FontWeight.w900,
-            )),
+          displaySmall: GoogleFonts.lato(
+            fontSize: 18,
+            color: TextColors.textBodySmallColor,
+            fontWeight: FontWeight.w400,
+          ),
+          labelSmall: GoogleFonts.lato(
+            fontSize: 20,
+            color: TextColors.textLargeLabelColor,
+            fontWeight: FontWeight.w500,
+          ),
+          labelLarge: GoogleFonts.lato(
+            fontSize: 150,
+            color: TextColors.textLargeLabelColor,
+            fontWeight: FontWeight.w300,
+          ),
+          bodySmall: GoogleFonts.lato(
+            fontSize: 24,
+            color: TextColors.textBodySmallColor,
+            fontWeight: FontWeight.w400,
+          ),
+          bodyLarge: GoogleFonts.lato(
+            fontSize: 40,
+            color: TextColors.textBodyLargeColor,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
         baseColor: AppColors.neumorphicBackgroundColor,
         lightSource: LightSource.topLeft,
         depth: 6,

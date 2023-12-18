@@ -5,6 +5,10 @@ import 'package:tesla_app/colors.dart';
 Widget buildNeumorphicButton({
   required String path,
   required VoidCallback onPressed,
+  required Color color,
+  required Color borderColor,
+  required double borerWidth,
+  required double scale,
 }) {
   return NeumorphicButton(
     duration: const Duration(milliseconds: 300),
@@ -12,25 +16,25 @@ Widget buildNeumorphicButton({
     curve: Curves.linear,
     minDistance: 0,
     padding: const EdgeInsets.all(8.0),
-    style: const NeumorphicStyle(
+    style: NeumorphicStyle(
       intensity: 0.8,
       shadowDarkColorEmboss: AppColors.neumorphicShadowDarkColorEmboss,
       shadowLightColor: AppColors.neumorphicShadowLightColor,
       surfaceIntensity: 0.1,
       border: NeumorphicBorder(
         isEnabled: true,
-        color: AppColors.neumorphicBorderColor,
-        width: 0.6,
+        color: borderColor,
+        width: borerWidth,
       ),
       shape: NeumorphicShape.convex,
-      boxShape: NeumorphicBoxShape.circle(),
-      depth: 20,
+      boxShape: const NeumorphicBoxShape.circle(),
+      depth: 6,
       disableDepth: false,
       shadowDarkColor: AppColors.neumorphicShadowDarkColor,
-      color: AppColors.neumorphicBackgroundColor,
+      color: color,
     ),
     child: Transform.scale(
-      scale: 0.5,
+      scale: scale,
       child: Image.asset(
         path,
       ),
