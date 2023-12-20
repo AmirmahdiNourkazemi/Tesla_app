@@ -75,15 +75,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               statusCenter(context)
             },
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
-            AnimatedContainer(
-              curve: Curves.linear,
-              duration: const Duration(seconds: 3),
-              transform: Matrix4.translationValues(
-                  0, isLocked ? MediaQuery.of(context).size.height : 0, 0),
-              child: endBody(context),
-            ),
+            if (!isLocked) ...{
+              AnimatedContainer(
+                curve: Curves.linear,
+                duration: const Duration(seconds: 3),
+                transform: Matrix4.translationValues(
+                    0, isLocked ? MediaQuery.of(context).size.height : 0, 0),
+                child: endBody(context),
+              ),
+            } else ...{
+              buttonAC(context)
+            }
           ],
         ),
       ),
@@ -190,6 +194,70 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return FadeInRightBig(
       delay: const Duration(seconds: 1),
       child: Image.asset('assets/images/car-front.png'),
+    );
+  }
+
+  Widget buttonAC(BuildContext context) {
+    return Container(
+      height: 150,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment(0.00, -1.00),
+          end: Alignment(0, 1),
+          colors: [
+            Color(0xFF353A40),
+            Color(0xFF15161A),
+          ],
+        ),
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(50),
+            topRight: Radius.circular(50),
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30)),
+        border: Border.all(
+          strokeAlign: BorderSide.strokeAlignOutside,
+          color: AppColors.neumorphicShadowDarkColorEmboss,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 35),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'A/C is ON',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                Text(
+                  'Tap to turn off or swipe up\for a fast setup',
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 75,
+            child: buildNeumorphicButton(
+              path: 'assets/images/lock.png',
+              onPressed: () {
+                // setState(() {
+                //   isLocked = !isLocked; // Toggle the lock state
+                // });
+              },
+              borerWidth: 2,
+              scale: 0.9,
+              color: AppColors.neumorphicBackgroundColorbtnBlue,
+              borderColor: AppColors.neumorphicBorderColorBtnBlue,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
