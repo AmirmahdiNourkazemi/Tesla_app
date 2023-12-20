@@ -16,31 +16,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NeumorphicAppBar(
-        color: Color(0xFF2F353A),
+        color: AppColors.appBarBackgroundColor,
+        title: isLocked ? FadeInDown(child: titleAppBar(context)) : null,
         actions: [
-          AnimatedContainer(
-            curve: Curves.linear,
-            duration: const Duration(seconds: 2),
-            transform: Matrix4.translationValues(
-                0, isLocked ? -MediaQuery.of(context).size.height : 0, 0),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: SizedBox(
-                // width: 90,
-                child: buildNeumorphicButton(
-                  path: 'assets/images/setting.png',
-                  onPressed: () {
-                    //  print('object');
-                  },
-                  borerWidth: 0.6,
-                  scale: 0.5,
-                  color: AppColors.neumorphicBackgroundColor,
-                  borderColor: AppColors.neumorphicBorderColor,
-                ),
-              ),
-            ),
-          ),
+          if (!isLocked) ...{
+            settingAppBar(context),
+          } else ...{
+            personAppBar(context)
+          }
         ],
+        leading: isLocked ? menueAppBar(context) : null,
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -57,14 +42,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             if (!isLocked) ...{
               AnimatedContainer(
-                  curve: Curves.linear,
-                  duration: const Duration(seconds: 2),
-                  transform: Matrix4.translationValues(
-                      0, isLocked ? -MediaQuery.of(context).size.height : 0, 0),
-                  child: topBody(context))
+                curve: Curves.linear,
+                duration: const Duration(seconds: 2),
+                transform: Matrix4.translationValues(
+                  0,
+                  isLocked ? -MediaQuery.of(context).size.height : 0,
+                  0,
+                ),
+                child: topBody(context),
+              )
             } else ...{
               AnimatedContainer(
-                duration: Duration(seconds: 2),
+                duration: const Duration(seconds: 2),
                 transform: Matrix4.translationValues(
                     0, isLocked ? 0 : MediaQuery.of(context).size.height, 0),
                 child: redContainer(),
@@ -95,9 +84,105 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
+  Column titleAppBar(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Tesla',
+          style: Theme.of(context).textTheme.displaySmall,
+        ),
+        Text(
+          'Cybertruck',
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+      ],
+    );
+  }
+
+  AnimatedContainer settingAppBar(BuildContext context) {
+    return AnimatedContainer(
+      curve: Curves.linear,
+      duration: const Duration(seconds: 3),
+      transform: Matrix4.translationValues(
+          0, isLocked ? -MediaQuery.of(context).size.height : 0, 0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 0),
+        child: SizedBox(
+          // width: 90,
+          child: FadeInDown(
+            child: buildNeumorphicButton(
+              path: 'assets/images/setting.png',
+              onPressed: () {
+                //  print('object');
+              },
+              borerWidth: 0.6,
+              scale: 0.5,
+              color: AppColors.neumorphicBackgroundColor,
+              borderColor: AppColors.neumorphicBorderColor,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  AnimatedContainer menueAppBar(BuildContext context) {
+    return AnimatedContainer(
+      curve: Curves.linear,
+      duration: const Duration(seconds: 3),
+      transform: Matrix4.translationValues(
+          0, isLocked ? 0 : -MediaQuery.of(context).size.height, 0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 0),
+        child: SizedBox(
+          // width: 90,
+          child: FadeInDown(
+            child: buildNeumorphicButton(
+              path: 'assets/images/menu.png',
+              onPressed: () {
+                //  print('object');
+              },
+              borerWidth: 0.6,
+              scale: 0.5,
+              color: AppColors.neumorphicBackgroundColor,
+              borderColor: AppColors.neumorphicBorderColor,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  AnimatedContainer personAppBar(BuildContext context) {
+    return AnimatedContainer(
+      curve: Curves.linear,
+      duration: const Duration(seconds: 3),
+      transform: Matrix4.translationValues(
+          0, isLocked ? 0 : -MediaQuery.of(context).size.height, 0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 0),
+        child: SizedBox(
+          // width: 90,
+          child: FadeInDownBig(
+            child: buildNeumorphicButton(
+              path: 'assets/images/person.png',
+              onPressed: () {
+                //  print('object');
+              },
+              borerWidth: 0.6,
+              scale: 0.5,
+              color: AppColors.neumorphicBackgroundColor,
+              borderColor: AppColors.neumorphicBorderColor,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget redContainer() {
     return FadeInLeft(
-      delay: Duration(seconds: 1),
+      delay: const Duration(seconds: 1),
       child: Container(
         height: 200, // Adjust the height as needed
         color: Colors.red, // Color of the red container

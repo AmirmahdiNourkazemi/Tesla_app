@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color neumorphicBackgroundColor = Color(0xff1C1F22);
+   static const Color appBarBackgroundColor = Color(0xFF2F353A);
   static const Color neumorphicBackgroundColorbtnBlue = Color(0xff058DD9);
   static const Color neumorphicShadowDarkColor = Color(0xff475057);
   static const Color neumorphicShadowDarkColorEmboss = Color(0xFF424750);
