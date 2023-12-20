@@ -2,9 +2,11 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tesla_app/colors.dart';
 import 'package:tesla_app/presentation/welcome/widget/NeumorphicButton.dart';
 
+import '../detail/detail.dart';
 import 'widget/InfoBtn.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -244,14 +246,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           SizedBox(
             width: 75,
             child: buildNeumorphicButton(
-              path: 'assets/images/lock.png',
+              path: 'assets/images/power.png',
               onPressed: () {
-                // setState(() {
-                //   isLocked = !isLocked; // Toggle the lock state
-                // });
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        duration: const Duration(milliseconds: 400),
+                        type: PageTransitionType.bottomToTopPop,
+                        child: const DetailScreen(),
+                        childCurrent: WelcomeScreen(),
+                        isIos: true));
               },
               borerWidth: 2,
-              scale: 0.9,
+              scale: 0.3,
               color: AppColors.neumorphicBackgroundColorbtnBlue,
               borderColor: AppColors.neumorphicBorderColorBtnBlue,
             ),

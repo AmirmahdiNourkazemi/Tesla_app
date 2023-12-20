@@ -38,6 +38,7 @@ dependencies:
   flutter_neumorphic_plus: ^3.3.0
   google_fonts: ^6.1.0
   animate_do: ^3.0.2
+  page_transition: ^2.1.0
 
 dev_dependencies:
   flutter_test:
