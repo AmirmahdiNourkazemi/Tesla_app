@@ -65,6 +65,11 @@ class MyApp extends StatelessWidget {
             color: TextColors.textBodyLargeColor,
             fontWeight: FontWeight.w900,
           ),
+          displayMedium: GoogleFonts.roboto(
+            fontSize: 40,
+            color: TextColors.textBodyLargeColor,
+            fontWeight: FontWeight.w900,
+          ),
         ),
         baseColor: AppColors.neumorphicBackgroundColor,
         lightSource: LightSource.topLeft,

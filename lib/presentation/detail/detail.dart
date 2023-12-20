@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../colors.dart';
 import '../welcome/widget/NeumorphicButton.dart';
@@ -11,6 +12,9 @@ class DetailScreen extends StatefulWidget {
   @override
   State<DetailScreen> createState() => _DetailScreenState();
 }
+
+double _gaugeValue = 40;
+double _sliderValue = 10;
 
 class _DetailScreenState extends State<DetailScreen> {
   @override
@@ -56,45 +60,213 @@ class _DetailScreenState extends State<DetailScreen> {
             child: ListView(
               children: [
                 indicator(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'A/C is ON',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          Text(
-                            'Tap to turn off or swipe up\for a fast setup',
-                            style: Theme.of(context).textTheme.displaySmall,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 75,
-                      child: buildNeumorphicButton(
-                        path: 'assets/images/power.png',
-                        onPressed: () {},
-                        borerWidth: 2,
-                        scale: 0.3,
-                        color: AppColors.neumorphicBackgroundColorbtnBlue,
-                        borderColor: AppColors.neumorphicBorderColorBtnBlue,
-                      ),
-                    ),
-                  ],
+                acButton(context),
+                sfRadialGaugeContainer(context),
+                const SizedBox(
+                  height: 20,
                 ),
+                fanSpeed()
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Column fanSpeed() {
+    return Column(
+      children: [
+        const Text('Fan speed'),
+        const SizedBox(
+          height: 25,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: NeumorphicSlider(
+            height: 10,
+            style: const SliderStyle(
+              accent: Color(0xFF0172BE),
+              depth: 1,
+              border: NeumorphicBorder(
+                color: AppColors.neumorphicBorderColor,
+                width: 2,
+              ),
+            ),
+            value: _sliderValue,
+            onChangeStart: (percent) {
+              setState(() {
+                _sliderValue = percent;
+              });
+            },
+            onChanged: (percent) {
+              setState(() {
+                _sliderValue = percent;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  SizedBox sfRadialGaugeContainer(BuildContext context) {
+    return SizedBox(
+      height: 330,
+      child: NeumorphicButton(
+        style: const NeumorphicStyle(
+            intensity: 0.2,
+            shadowDarkColorEmboss: AppColors.neumorphicShadowDarkColorEmboss,
+            shadowLightColor: AppColors.neumorphicShadowLightColor,
+            surfaceIntensity: 0.1,
+            border: NeumorphicBorder(
+              isEnabled: true,
+              color: AppColors.neumorphicBorderColor,
+              width: 0.2,
+            ),
+            shape: NeumorphicShape.flat,
+            boxShape: NeumorphicBoxShape.circle(),
+            depth: 20,
+            disableDepth: false,
+            shadowDarkColor: AppColors.neumorphicShadowDarkColor,
+            color: AppColors.neumorphicBackgroundColor),
+        child: Stack(
+          children: [
+            SfRadialGauge(
+              animationDuration: 2000,
+              enableLoadingAnimation: true,
+              axes: <RadialAxis>[
+                RadialAxis(
+                  showTicks: true,
+                  showFirstLabel: false,
+                  showLastLabel: false,
+                  showLabels: false,
+                  radiusFactor: 0.9,
+                  majorTickStyle: const MajorTickStyle(
+                    length: 0,
+                    color: AppColors.neumorphicShadowDarkColorEmboss,
+                  ),
+                  ticksPosition: ElementsPosition.outside,
+                  pointers: <GaugePointer>[
+                    RangePointer(
+                      cornerStyle: CornerStyle.bothCurve,
+                      width: 0.2,
+                      enableAnimation: true,
+                      sizeUnit: GaugeSizeUnit.factor,
+                      value: _gaugeValue,
+                      gradient: const SweepGradient(
+                        colors: [
+                          Color(0xFF0172BE),
+                          Color(0xFF0F9BEE),
+                        ],
+                      ),
+                      enableDragging: true,
+                      onValueChanged: (value) {
+                        setState(() {
+                          _gaugeValue = value;
+                        });
+                      },
+                      animationDuration: 1800,
+                    ),
+                  ],
+                  axisLineStyle: const AxisLineStyle(
+                    thickness: 0.2,
+                    cornerStyle: CornerStyle.bothCurve,
+                    gradient: SweepGradient(
+                      colors: [
+                        Color(0xFF202428),
+                        Colors.black,
+                      ],
+                    ),
+                    thicknessUnit: GaugeSizeUnit.factor,
+                  ),
+                )
+              ],
+            ),
+            Positioned(
+              top: 130,
+              left: 215,
+              child: Container(
+                width: 10,
+                height: 10,
+                decoration: const ShapeDecoration(
+                  shape: OvalBorder(
+                    side: BorderSide(
+                        width: 3, color: TextColors.textBodySmallColor),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 130,
+              left: 160,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        _gaugeValue.toStringAsFixed(0),
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'C',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Cooling...',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Row acButton(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                'A/C is ON',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              Text(
+                'Tap to turn off or swipe up\for a fast setup',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          width: 75,
+          child: buildNeumorphicButton(
+            path: 'assets/images/power.png',
+            onPressed: () {},
+            borerWidth: 2,
+            scale: 0.3,
+            color: AppColors.neumorphicBackgroundColorbtnBlue,
+            borderColor: AppColors.neumorphicBorderColorBtnBlue,
+          ),
+        ),
+      ],
     );
   }
 
