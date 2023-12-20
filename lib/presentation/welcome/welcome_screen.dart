@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,25 +11,32 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  bool isLocked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NeumorphicAppBar(
         color: Color(0xFF2F353A),
         actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: SizedBox(
-              // width: 90,
-              child: buildNeumorphicButton(
-                path: 'assets/images/setting.png',
-                onPressed: () {
-                  //  print('object');
-                },
-                borerWidth: 0.6,
-                scale: 0.5,
-                color: AppColors.neumorphicBackgroundColor,
-                borderColor: AppColors.neumorphicBorderColor,
+          AnimatedContainer(
+            curve: Curves.linear,
+            duration: const Duration(seconds: 2),
+            transform: Matrix4.translationValues(
+                0, isLocked ? -MediaQuery.of(context).size.height : 0, 0),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 0),
+              child: SizedBox(
+                // width: 90,
+                child: buildNeumorphicButton(
+                  path: 'assets/images/setting.png',
+                  onPressed: () {
+                    //  print('object');
+                  },
+                  borerWidth: 0.6,
+                  scale: 0.5,
+                  color: AppColors.neumorphicBackgroundColor,
+                  borderColor: AppColors.neumorphicBorderColor,
+                ),
               ),
             ),
           ),
@@ -47,16 +55,56 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
         child: ListView(
           children: [
-            topBody(context),
+            if (!isLocked) ...{
+              AnimatedContainer(
+                  curve: Curves.linear,
+                  duration: const Duration(seconds: 2),
+                  transform: Matrix4.translationValues(
+                      0, isLocked ? -MediaQuery.of(context).size.height : 0, 0),
+                  child: topBody(context))
+            } else ...{
+              AnimatedContainer(
+                duration: Duration(seconds: 2),
+                transform: Matrix4.translationValues(
+                    0, isLocked ? 0 : MediaQuery.of(context).size.height, 0),
+                child: redContainer(),
+              ),
+            },
             const SizedBox(
               height: 40,
             ),
-            centerBody(context),
+            AnimatedContainer(
+                curve: Curves.linear,
+                duration: const Duration(seconds: 2),
+                transform: Matrix4.translationValues(
+                    isLocked ? MediaQuery.of(context).size.height : 0, 0, 0),
+                child: centerBody(context)),
             const SizedBox(
               height: 20,
             ),
-            endBody(context)
+            AnimatedContainer(
+              curve: Curves.linear,
+              duration: const Duration(seconds: 2),
+              transform: Matrix4.translationValues(
+                  0, isLocked ? MediaQuery.of(context).size.height : 0, 0),
+              child: endBody(context),
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget redContainer() {
+    return FadeInLeft(
+      delay: Duration(seconds: 1),
+      child: Container(
+        height: 200, // Adjust the height as needed
+        color: Colors.red, // Color of the red container
+        alignment: Alignment.center,
+        child: Text(
+          'Red Container', // Text or content of the red container
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );
@@ -77,7 +125,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           child: buildNeumorphicButton(
             path: 'assets/images/lock.png',
             onPressed: () {
-              //  print('object');
+              setState(() {
+                isLocked = !isLocked; // Toggle the lock state
+              });
             },
             borerWidth: 2,
             scale: 0.9,
@@ -130,11 +180,13 @@ Stack centerBody(BuildContext context) {
         ),
       ),
       Positioned(
-        child: Image.asset(
-          'assets/images/cybertruck-mod-black2 1.png',
-          //width: MediaQuery.of(context).size.width * 0.9,
-          height: 250,
-          fit: BoxFit.cover,
+        child: FadeInRightBig(
+          child: Image.asset(
+            'assets/images/cybertruck-mod-black2 1.png',
+            //width: MediaQuery.of(context).size.width * 0.9,
+            height: 250,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     ],

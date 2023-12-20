@@ -28,7 +28,7 @@ Widget buildNeumorphicButton({
       ),
       shape: NeumorphicShape.convex,
       boxShape: const NeumorphicBoxShape.circle(),
-      depth: 6,
+      depth: 15,
       disableDepth: false,
       shadowDarkColor: AppColors.neumorphicShadowDarkColor,
       color: color,
