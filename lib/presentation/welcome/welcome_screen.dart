@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tesla_app/colors.dart';
 import 'package:tesla_app/presentation/welcome/widget/NeumorphicButton.dart';
 
+import 'widget/InfoBtn.dart';
+
 class WelcomeScreen extends StatefulWidget {
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
@@ -53,27 +55,31 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               )
             } else ...{
               AnimatedContainer(
-                duration: const Duration(seconds: 2),
+                duration: const Duration(seconds: 1),
                 transform: Matrix4.translationValues(
                     0, isLocked ? 0 : MediaQuery.of(context).size.height, 0),
-                child: redContainer(),
+                child: carFront(),
               ),
             },
             const SizedBox(
-              height: 40,
+              height: 20,
             ),
-            AnimatedContainer(
-                curve: Curves.linear,
-                duration: const Duration(seconds: 2),
-                transform: Matrix4.translationValues(
-                    isLocked ? MediaQuery.of(context).size.height : 0, 0, 0),
-                child: centerBody(context)),
+            if (!isLocked) ...{
+              AnimatedContainer(
+                  curve: Curves.linear,
+                  duration: const Duration(seconds: 3),
+                  transform: Matrix4.translationValues(
+                      isLocked ? MediaQuery.of(context).size.height : 0, 0, 0),
+                  child: centerBody(context))
+            } else ...{
+              statusCenter(context)
+            },
             const SizedBox(
               height: 20,
             ),
             AnimatedContainer(
               curve: Curves.linear,
-              duration: const Duration(seconds: 2),
+              duration: const Duration(seconds: 3),
               transform: Matrix4.translationValues(
                   0, isLocked ? MediaQuery.of(context).size.height : 0, 0),
               child: endBody(context),
@@ -156,7 +162,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   AnimatedContainer personAppBar(BuildContext context) {
     return AnimatedContainer(
       curve: Curves.linear,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 1),
       transform: Matrix4.translationValues(
           0, isLocked ? 0 : -MediaQuery.of(context).size.height, 0),
       child: Padding(
@@ -180,17 +186,151 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
-  Widget redContainer() {
-    return FadeInLeft(
+  Widget carFront() {
+    return FadeInRightBig(
       delay: const Duration(seconds: 1),
-      child: Container(
-        height: 200, // Adjust the height as needed
-        color: Colors.red, // Color of the red container
-        alignment: Alignment.center,
-        child: Text(
-          'Red Container', // Text or content of the red container
-          style: TextStyle(color: Colors.white),
-        ),
+      child: Image.asset('assets/images/car-front.png'),
+    );
+  }
+
+  Widget statusCenter(BuildContext context) {
+    return FadeInLeft(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 45),
+            child: Text(
+              'Status',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/battery.png',
+                        width: 8,
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Battery',
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    '54%',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/range.png',
+                        width: 11,
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Range',
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    '297 km',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/tempreture.png',
+                        width: 8,
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Range',
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    '297 km',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  )
+                ],
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 45),
+            child: Text(
+              'Information',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            height: 200,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              scrollDirection: Axis.horizontal,
+              children: [
+                infoButton(
+                    context: context,
+                    onPressed: () {},
+                    borderRaduis: 5,
+                    info: 'Engine',
+                    subtitle: 'Sleeping mode',
+                    borerWidth: 1),
+                SizedBox(
+                  width: 20,
+                ),
+                infoButton(
+                    context: context,
+                    onPressed: () {},
+                    borderRaduis: 5,
+                    info: 'Climate',
+                    subtitle: 'A/C is ON',
+                    borerWidth: 1),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

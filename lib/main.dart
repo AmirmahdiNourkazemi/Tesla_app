@@ -55,6 +55,16 @@ class MyApp extends StatelessWidget {
             color: TextColors.textBodyLargeColor,
             fontWeight: FontWeight.w900,
           ),
+          headlineSmall: GoogleFonts.lato(
+            fontSize: 12,
+            color: TextColors.textBodySmallColor,
+            fontWeight: FontWeight.w900,
+          ),
+          bodyMedium: GoogleFonts.lato(
+            fontSize: 20,
+            color: TextColors.textBodyLargeColor,
+            fontWeight: FontWeight.w900,
+          ),
         ),
         baseColor: AppColors.neumorphicBackgroundColor,
         lightSource: LightSource.topLeft,

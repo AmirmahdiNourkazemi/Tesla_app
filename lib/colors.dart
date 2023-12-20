@@ -5,6 +5,7 @@ class AppColors {
    static const Color appBarBackgroundColor = Color(0xFF2F353A);
   static const Color neumorphicBackgroundColorbtnBlue = Color(0xff058DD9);
   static const Color neumorphicShadowDarkColor = Color(0xff475057);
+   static const Color infoBackgroundColor = Color(0xFF1E2328);
   static const Color neumorphicShadowDarkColorEmboss = Color(0xFF424750);
   static const Color neumorphicShadowLightColor = Color(0xFF424750);
   static const Color neumorphicBorderColor = Color(0x26000000);
