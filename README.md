@@ -1,16 +1,32 @@
-# tesla_app
+# Cybertruck App
 
-A new Flutter project.
+## Description
+This is a Neumorphism UI Tesla app that incorporates beautiful animations using the `animate_do` package, Neumorphic UI elements using the `flutter_neumorphic_plus` package, stunning charts with the `syncfusion_flutter_gauges` package, and smooth page transitions facilitated by the `page_transition` package.
 
-## Getting Started
+## Screenshots
+| Screenshot 1 | Screenshot 2 | Screenshot 3 |
+| ------------ | ------------ | ------------ |
+| ![Screenshot 1](/assets/images/screenshot-1.png) | ![Screenshot 2](/assets/images/screenshot-2.png) | ![Screenshot 3](/assets/images/screenshot-3.png) |
 
-This project is a starting point for a Flutter application.
+## Video Demo
+[![Watch the Video Demo](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](/assets/images/video.mp4)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Technologies Used
+- `animate_do`
+- `flutter_neumorphic_plus`
+- `syncfusion_flutter_gauges`
+- `page_transition`
+- [Other relevant technologies used]
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Animations and UI Design
+This app features a stunning Neumorphic UI design and incorporates captivating animations throughout the user experience.
+
+## LinkedIn
+Connect with me on [LinkedIn](https://www.linkedin.com/in/amirmahdi-nourkazemi-04613023a/)
+
+## Contribution
+[Instructions for contributing to the project if open-source]
+
+## License
+[Specify the license for your project, if any]

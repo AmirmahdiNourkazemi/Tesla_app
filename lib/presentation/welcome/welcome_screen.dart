@@ -194,76 +194,78 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   Widget carFront() {
     return FadeInRightBig(
-      delay: const Duration(seconds: 1),
+      //delay: const Duration(seconds: 1),
       child: Image.asset('assets/images/car-front.png'),
     );
   }
 
   Widget buttonAC(BuildContext context) {
-    return Container(
-      height: 150,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment(0.00, -1.00),
-          end: Alignment(0, 1),
-          colors: [
-            Color(0xFF353A40),
-            Color(0xFF15161A),
+    return FadeInUp(
+      child: Container(
+        height: 150,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment(0.00, -1.00),
+            end: Alignment(0, 1),
+            colors: [
+              Color(0xFF353A40),
+              Color(0xFF15161A),
+            ],
+          ),
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(50),
+              topRight: Radius.circular(50),
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30)),
+          border: Border.all(
+            strokeAlign: BorderSide.strokeAlignOutside,
+            color: AppColors.neumorphicShadowDarkColorEmboss,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 35),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'A/C is ON',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  Text(
+                    'Tap to turn off or swipe up\for a fast setup',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 75,
+              child: buildNeumorphicButton(
+                path: 'assets/images/power.png',
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          duration: const Duration(milliseconds: 400),
+                          type: PageTransitionType.bottomToTopPop,
+                          child: const DetailScreen(),
+                          childCurrent: WelcomeScreen(),
+                          isIos: true));
+                },
+                borerWidth: 2,
+                scale: 0.3,
+                color: AppColors.neumorphicBackgroundColorbtnBlue,
+                borderColor: AppColors.neumorphicBorderColorBtnBlue,
+              ),
+            ),
           ],
         ),
-        borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(50),
-            topRight: Radius.circular(50),
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30)),
-        border: Border.all(
-          strokeAlign: BorderSide.strokeAlignOutside,
-          color: AppColors.neumorphicShadowDarkColorEmboss,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 35),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'A/C is ON',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                Text(
-                  'Tap to turn off or swipe up\for a fast setup',
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: 75,
-            child: buildNeumorphicButton(
-              path: 'assets/images/power.png',
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        duration: const Duration(milliseconds: 400),
-                        type: PageTransitionType.bottomToTopPop,
-                        child: const DetailScreen(),
-                        childCurrent: WelcomeScreen(),
-                        isIos: true));
-              },
-              borerWidth: 2,
-              scale: 0.3,
-              color: AppColors.neumorphicBackgroundColorbtnBlue,
-              borderColor: AppColors.neumorphicBorderColorBtnBlue,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -286,94 +288,102 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/images/battery.png',
-                        width: 8,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Battery',
-                        style: Theme.of(context).textTheme.displaySmall,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '54%',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  )
-                ],
+              FadeIn(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/battery.png',
+                          width: 8,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Battery',
+                          style: Theme.of(context).textTheme.displaySmall,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      '54%',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    )
+                  ],
+                ),
               ),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/images/range.png',
-                        width: 11,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Range',
-                        style: Theme.of(context).textTheme.displaySmall,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '297 km',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  )
-                ],
+              FadeIn(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/range.png',
+                          width: 11,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Range',
+                          style: Theme.of(context).textTheme.displaySmall,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      '297 km',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    )
+                  ],
+                ),
               ),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/images/tempreture.png',
-                        width: 8,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Range',
-                        style: Theme.of(context).textTheme.displaySmall,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '297 km',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  )
-                ],
+              FadeIn(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/tempreture.png',
+                          width: 8,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Range',
+                          style: Theme.of(context).textTheme.displaySmall,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      '297 km',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    )
+                  ],
+                ),
               )
             ],
           ),
           const SizedBox(
             height: 30,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 45),
-            child: Text(
-              'Information',
-              style: Theme.of(context).textTheme.bodyMedium,
+          FadeInLeft(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 45),
+              child: Text(
+                'Information',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
             ),
           ),
           const SizedBox(
@@ -381,28 +391,30 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ),
           SizedBox(
             height: 200,
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              scrollDirection: Axis.horizontal,
-              children: [
-                infoButton(
-                    context: context,
-                    onPressed: () {},
-                    borderRaduis: 5,
-                    info: 'Engine',
-                    subtitle: 'Sleeping mode',
-                    borerWidth: 1),
-                SizedBox(
-                  width: 20,
-                ),
-                infoButton(
-                    context: context,
-                    onPressed: () {},
-                    borderRaduis: 5,
-                    info: 'Climate',
-                    subtitle: 'A/C is ON',
-                    borerWidth: 1),
-              ],
+            child: FadeIn(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  infoButton(
+                      context: context,
+                      onPressed: () {},
+                      borderRaduis: 5,
+                      info: 'Engine',
+                      subtitle: 'Sleeping mode',
+                      borerWidth: 1),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  infoButton(
+                      context: context,
+                      onPressed: () {},
+                      borderRaduis: 5,
+                      info: 'Climate',
+                      subtitle: 'A/C is ON',
+                      borerWidth: 1),
+                ],
+              ),
             ),
           )
         ],
