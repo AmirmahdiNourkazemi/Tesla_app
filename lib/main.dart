@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       darkTheme: NeumorphicThemeData(
         textTheme: TextTheme(
           displaySmall: GoogleFonts.lato(
-            fontSize: 18,
+            fontSize: 15,
             color: TextColors.textBodySmallColor,
             fontWeight: FontWeight.w400,
           ),

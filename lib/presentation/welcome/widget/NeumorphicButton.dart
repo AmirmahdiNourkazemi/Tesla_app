@@ -9,6 +9,7 @@ Widget buildNeumorphicButton({
   required Color borderColor,
   required double borerWidth,
   required double scale,
+  double? depth = 15,
 }) {
   return NeumorphicButton(
     duration: const Duration(milliseconds: 300),
@@ -28,7 +29,7 @@ Widget buildNeumorphicButton({
       ),
       shape: NeumorphicShape.convex,
       boxShape: const NeumorphicBoxShape.circle(),
-      depth: 15,
+      depth: depth,
       disableDepth: false,
       shadowDarkColor: AppColors.neumorphicShadowDarkColor,
       color: color,

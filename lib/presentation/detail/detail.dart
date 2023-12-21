@@ -65,12 +65,132 @@ class _DetailScreenState extends State<DetailScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                fanSpeed()
+                fanSpeed(),
+                const SizedBox(
+                  height: 20,
+                ),
+                modes(context)
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Column modes(BuildContext context) {
+    return Column(
+      children: [
+        const Text('Mode'),
+        const SizedBox(
+          height: 25,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            FadeInUp(
+              child: Column(
+                children: [
+                  Text(
+                    'Auto',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SizedBox(
+                    width: 65,
+                    child: buildNeumorphicButton(
+                      depth: 0,
+                      path: 'assets/images/A.png',
+                      onPressed: () {},
+                      borerWidth: 2,
+                      scale: 1,
+                      color: AppColors.neumorphicBackgroundColorbtnBlue,
+                      borderColor: AppColors.neumorphicBorderColorBtnBlue,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            FadeInUp(
+              child: Column(
+                children: [
+                  Text(
+                    'Dry',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SizedBox(
+                    width: 65,
+                    child: buildNeumorphicButton(
+                      depth: 0,
+                      path: 'assets/images/dry.png',
+                      onPressed: () {},
+                      borerWidth: 2,
+                      scale: 0.3,
+                      color: AppColors.neumorphicBackgroundColor,
+                      borderColor: AppColors.neumorphicBorderColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            FadeInUp(
+              child: Column(
+                children: [
+                  Text(
+                    'Cool',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SizedBox(
+                    width: 65,
+                    child: buildNeumorphicButton(
+                      depth: 0,
+                      path: 'assets/images/cool.png',
+                      onPressed: () {},
+                      borerWidth: 2,
+                      scale: 0.3,
+                      color: AppColors.neumorphicBackgroundColor,
+                      borderColor: AppColors.neumorphicBorderColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            FadeInUp(
+              child: Column(
+                children: [
+                  Text(
+                    'Program',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SizedBox(
+                    width: 65,
+                    child: buildNeumorphicButton(
+                      depth: 0,
+                      path: 'assets/images/program.png',
+                      onPressed: () {},
+                      borerWidth: 2,
+                      scale: 0.3,
+                      color: AppColors.neumorphicBackgroundColor,
+                      borderColor: AppColors.neumorphicBorderColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -84,6 +204,28 @@ class _DetailScreenState extends State<DetailScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50),
           child: NeumorphicSlider(
+            thumb: Container(
+              width: 28,
+              height: 28,
+              decoration: const ShapeDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment(-0.63, 0.77),
+                  end: Alignment(0.63, -0.77),
+                  colors: [Color(0xFF141415), Color(0xFF2E3236)],
+                ),
+                shape: OvalBorder(
+                  side: BorderSide(width: 1, color: Color(0xFF282B2E)),
+                ),
+                shadows: [
+                  BoxShadow(
+                    color: Color(0x59000000),
+                    blurRadius: 20,
+                    offset: Offset(4, 6),
+                    spreadRadius: 0,
+                  )
+                ],
+              ),
+            ),
             height: 10,
             style: const SliderStyle(
               accent: Color(0xFF0172BE),
