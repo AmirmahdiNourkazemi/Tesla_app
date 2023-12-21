@@ -9,7 +9,7 @@ This is a Neumorphism UI Tesla app that incorporates beautiful animations using 
 | ![Screenshot 1](/assets/images/screenshot-1.png) | ![Screenshot 2](/assets/images/screenshot-2.png) | ![Screenshot 3](/assets/images/screenshot-3.png) |
 
 ## Video Demo
-[![Watch the Video Demo](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](/assets/images/video.mp4)
+[![Watch the Video Demo](/assets/images/video.mp4)](/assets/images/video.mp4)
 
 
 ## Technologies Used
@@ -17,7 +17,6 @@ This is a Neumorphism UI Tesla app that incorporates beautiful animations using 
 - `flutter_neumorphic_plus`
 - `syncfusion_flutter_gauges`
 - `page_transition`
-- [Other relevant technologies used]
 
 ## Animations and UI Design
 This app features a stunning Neumorphic UI design and incorporates captivating animations throughout the user experience.
